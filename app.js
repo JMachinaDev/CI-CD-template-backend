@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 
+// cors and express setup
 const corsOptions = {
   origin: '*'
 };
@@ -9,12 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
-
-const testAPIroute = require('./app/routes/testAPI');
-app.use('/test', testAPIroute);
+// Routes
+require('./app/routes/testAPI')(app);
 
 // Listen to DB/Port
 const PORT = require('./app/config/port.config').port;

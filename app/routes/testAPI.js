@@ -1,8 +1,15 @@
-let express = require('express');
-let router = express.Router();
+// app = express();
 
-router.get('/', function (req, res, next) {
-  res.send("API is working properly");
-});
+module.exports = function (app) {
 
-module.exports = router;
+  app.get('/', (req, res) => {
+    res.send('Hello World!')
+  });
+
+  //test routes
+  app.get('/test', (req, res) => {
+    res.send("Test route is working properly");
+  });
+
+};
+
