@@ -1,25 +1,25 @@
 const express = require('express');
 const cors = require('cors');
-const testAPIroute = require('./routes/testAPI');
-
-require('dotenv').config();
 
 const corsOptions = {
-  origin: 8000
+  origin: '*'
 };
 const app = express();
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
+});
+
+const testAPIroute = require('./app/routes/testAPI');
 app.use('/test', testAPIroute);
 
-const port = process.env.PORT || 8000;
+// Listen to DB/Port
+const PORT = require('./app/config/port.config').port;
+const port = PORT || 8000;
 app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
   console.log("Server started")
-})
+});
